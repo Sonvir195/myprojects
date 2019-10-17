@@ -6,26 +6,24 @@ class Main extends Component {
   	return (
     	<div id="content">
         	<h3> Search Party </h3>
-        		<div className="form-group mr-sm-2">
+          <form onSubmit={(event) => {
+        	   	event.preventDefault()        	   		
+        	   	const name = this.partyName.value        	   	
+        	   	this.props.searchDpl(name)
+        	  }}>
+        		  <div className="form-group mr-sm-2">
             		<input
-             			id="partyName"
+             			  id="partyName"
               			type="text" 
               			ref= {(input) => {this.partyName=input}}             				
               			className="form-control"
               			placeholder="Party Name"
               			required />
           		</div>              
-                <button
-                  name ={this.partyName}                                
-                  onClick = {(event) => {
-                    this.props.searchDpl(event.target.name)
-                  }}
-                >
-                  Search
-                </button>     		
-        	
+              <button type="click" className="btn btn-primary"> Search </button>     		
+          </form>
         		<p>&nbsp;</p>
-        		<h2>DPL List</h2>
+        		<h5>DPL List</h5>
         		<table className="table">
           			<thead>
             			<tr>

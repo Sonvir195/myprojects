@@ -32,21 +32,26 @@ class App extends Component {
 
     // Load Account
 
-    const accounts = await web3.eth.getAccounts()
+    const accounts = await web3.eth.getAccounts()    
     this.setState({account : accounts[0]}) 
-    const networkId = await web3.eth.net.getId() 
-    const networkData = SearchDPL.networks[networkId]
+    const networkId = await web3.eth.net.getId()     
+    const networkData = SearchDPL.networks[networkId]    
     if (networkData)  {
-      const verifydpl = web3.eth.Contract(SearchDPL.abi, networkData.address)      
-      this.setState({verifydpl})
-      const dplCount =await verifydpl.methods.dplCount().call()        
-      this.setState({dplCount})
+      const verifydpl = web3.eth.Contract(SearchDPL.abi, networkData.address)            
+      this.setState({verifydpl})      
+      // const dplCount =await verifydpl.methods.dplCount().call()
+              
+      // this.setState({dplCount})
+      // console.log(dplCount.toNumber())
+      
       // for( var i = 1; i <= dplCount; i++) {
-      //     const dpl =await verifydpl.methods.dpls(i).call() 
-      //     this.setState({
-      //       dpls :[...this.state.dpls, dpl]
+      //   console.log(i)
+      //   const dpl =await verifydpl.methods.dpls(i).call()
+      //   console.log(dpl) 
+      //   this.setState({
+      //   dpls :[...this.state.dpls, dpl]
       //   })
-      //}   
+      // }   
       this.setState({loading : false})      
     } else {
         window.alert('SearchDPL contract not deployed to detected network.')
@@ -77,10 +82,11 @@ class App extends Component {
   }
   searchDpl(name) {
     this.setState({loading : true})
-    this.state.verifydpl.methods.searchDpl(name).send({from :this.state.account, value : name})
+    this.state.verifydpl.methods.searchDpl(name).send({from :this.state.account})    
     .once('receipt',(receipt) => {
       this.setState({loading :false})
-    })
+    }) 
+    
   }
   render() {
     return (

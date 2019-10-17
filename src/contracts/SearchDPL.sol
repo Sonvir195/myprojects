@@ -5,7 +5,7 @@ contract SearchDPL {
   uint public dplCount = 0;
  
   
-  mapping(uint => DPL) internal dpls;
+  mapping(uint => DPL) public dpls;
   
   DPL[] public nameList;
   
@@ -44,6 +44,7 @@ contract SearchDPL {
         
        createDPL( "Sonvir","India","A2,LiquidHub,DLF World Tech Park","Line 1","Gurgaon");
        createDPL( "Nikhil","Poland","A4,Capgemini,DLF World Tech Park","Line 2","Delhi");
+       createDPL( "Nikhil","Poland","A4,Capgemini,DLF World Tech Park","Line 2","Delhi");
     }
 
   function createDPL(string memory _name, string memory _country, string memory _addr, string memory _street, string memory _city) public {
@@ -72,7 +73,7 @@ contract SearchDPL {
 
     // Increment the product count
 
-   dplCount  ++;
+    dplCount++;
 
     // Create the DPL
 
@@ -85,7 +86,7 @@ contract SearchDPL {
 
   }
 
-  function searchDpl(string memory _name) public {
+  function searchDpl(string memory _name) view public returns(DPL[]) {
 
         //Fetch the DPL
     
